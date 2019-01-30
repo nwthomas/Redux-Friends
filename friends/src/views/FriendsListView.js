@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFriends } from "../store/actions";
+import { FriendsList } from "../components/FriendsList";
+import PropTypes from "prop-types";
 
 class FriendsListView extends Component {
   componentDidMount() {
@@ -10,13 +12,15 @@ class FriendsListView extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.getFriends} type="button">
-          Get Friends
-        </button>
+        <FriendsList friends={this.props.friends} />
       </div>
     );
   }
 }
+
+FriendsListView.propTypes = {
+  friends: PropTypes.object
+};
 
 const mapStateToProps = state => {
   return {
