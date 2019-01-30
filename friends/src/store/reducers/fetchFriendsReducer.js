@@ -5,18 +5,38 @@ import {
 } from "../types";
 
 const initialState = {
-  friends: []
+  friends: [],
+  fetchingFriends: false,
+  friendsFetched: false,
+  updatingFriend: false,
+  friendUpdated: false,
+  deletingFriend: false,
+  friendDeleted: false,
+  error: null
 };
 
-export const fetchFriendsReducer = (state = initialState, action) => {
-  console.log("reducer", action);
+export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_FRIENDS_START:
-      return state;
+      return {
+        ...state,
+        fetchingFriends: true,
+        error: ""
+      };
     case FETCH_FRIENDS_SUCCESS:
-      return state;
+      return {
+        ...state,
+        fetchingFriends: false,
+        friendsFetched: true,
+        friends: action.payload,
+        error: ""
+      };
     case FETCH_FRIENDS_ERROR:
-      return state;
+      return {
+        ...state,
+        fetchingFriends: false,
+        error: action.payload
+      };
     default:
       return state;
   }

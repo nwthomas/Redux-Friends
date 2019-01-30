@@ -10,11 +10,9 @@ export const getFriends = _ => dispatch => {
   axios
     .get("http://localhost:5000/api/friends")
     .then(res => {
-      console.log(res);
       dispatch({ type: FETCH_FRIENDS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log(err);
       dispatch({ type: FETCH_FRIENDS_ERROR, payload: err.data });
     });
 };
