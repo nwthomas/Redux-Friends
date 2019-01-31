@@ -7,6 +7,9 @@ import {
   ADD_FRIEND_SUCCESS,
   ADD_FRIEND_ERROR,
   UPDATE_INPUT_TEXT,
+  DELETE_FRIEND_START,
+  DELETE_FRIEND_SUCCESS,
+  DELETE_FRIEND_ERROR,
   CLEAR_FORM
 } from "../types";
 
@@ -46,4 +49,16 @@ export const handleFormChange = e => {
     type: UPDATE_INPUT_TEXT,
     payload: e
   };
+};
+
+export const deleteFriend = id => dispatch => {
+  dispatch({ type: DELETE_FRIEND_START });
+  axios
+    .delete(`http://localhost:5000/api/friends/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_FRIEND_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_FRIEND_ERROR, payload: err.data });
+    });
 };

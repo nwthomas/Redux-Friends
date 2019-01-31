@@ -1,12 +1,12 @@
 // =================================== Variables/Mixins
-@import "../styles/libs/variables";
-@import "../styles/libs/mixins";
+@import "../styles/libs/_variables.scss";
+@import "../styles/libs/_mixins.scss";
 
 // =================================== General Styles
-@import "../styles/libs/reset";
-@import "../styles/libs/general";
+@import "../styles/libs/_reset.scss";
+@import "../styles/libs/_general.scss";
 
 // =================================== Page Components
-@import "../components/Friend/Friend";
-@import "../components/FriendsList/FriendsList";
-@import "../components/FriendsForm/FriendsForm";
+@import "../components/Friend/_Friend.scss";
+@import "../components/FriendsList/_FriendsList.scss";
+@import "../components/FriendsForm/_FriendsForm.scss";

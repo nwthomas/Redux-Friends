@@ -4,17 +4,22 @@ import {
   FETCH_FRIENDS_ERROR,
   ADD_FRIEND_START,
   ADD_FRIEND_SUCCESS,
-  ADD_FRIEND_ERROR
+  ADD_FRIEND_ERROR,
+  DELETE_FRIEND_START,
+  DELETE_FRIEND_SUCCESS,
+  DELETE_FRIEND_ERROR
 } from "../types";
 
 const initialState = {
   friends: [],
   fetchingFriends: false,
   friendsFetched: false,
-  updatingFriend: true,
+  updatingFriend: false,
   friendUpdated: false,
   addingNewFriend: false,
-  newFriendAdded: true,
+  newFriendAdded: false,
+  deletingFriend: false,
+  friendDeleted: false,
   updateID: null,
   error: null
 };
@@ -61,6 +66,25 @@ export const friendsReducer = (state = initialState, action) => {
         addingNewFriend: false,
         newFriendAdded: false,
         error: action.payload
+      };
+    case DELETE_FRIEND_START:
+      return {
+        ...state,
+        deletingFriend: true,
+        error: ""
+      };
+    case DELETE_FRIEND_SUCCESS:
+      return {
+        ...state,
+        friends: action.payload,
+        friendDeleted: true,
+        deletingFriend: false
+      };
+    case DELETE_FRIEND_ERROR:
+      return {
+        ...state,
+        deletingFriend: false,
+        error: action
       };
     default:
       return state;
