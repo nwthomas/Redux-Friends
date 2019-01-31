@@ -21,6 +21,11 @@ class FriendsForm extends Component {
     );
   };
 
+  clearForm = e => {
+    e.preventDefault();
+    this.props.clearForm();
+  };
+
   render() {
     return (
       <form onSubmit={this.submitFriend}>
@@ -51,7 +56,9 @@ class FriendsForm extends Component {
         <button type="submit">
           {this.props.updatingFriend ? "Update Friend" : "Submit"}
         </button>
-        <button type="button">Cancel</button>
+        <button onClick={this.clearForm} type="button">
+          Clear
+        </button>
       </form>
     );
   }
