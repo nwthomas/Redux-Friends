@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./_Friend.scss";
 
 const Friend = props => {
-  console.log(props.friend);
   return (
     <div className="friend">
       <h2>{props.friend.name}</h2>

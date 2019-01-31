@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFriends } from "../store/actions";
 import { FriendsList } from "../components/FriendsList";
+import { FriendsForm } from "../components/FriendsForm";
 import PropTypes from "prop-types";
-
 class FriendsListView extends Component {
   componentDidMount() {
     this.props.getFriends();
@@ -12,6 +12,7 @@ class FriendsListView extends Component {
   render() {
     return (
       <div>
+        <FriendsForm />
         <FriendsList friends={this.props.friends} />
       </div>
     );
@@ -19,7 +20,7 @@ class FriendsListView extends Component {
 }
 
 FriendsListView.propTypes = {
-  friends: PropTypes.object
+  friends: PropTypes.array
 };
 
 const mapStateToProps = state => {
@@ -28,7 +29,11 @@ const mapStateToProps = state => {
   };
 };
 
+const mapActionsToProps = {
+  getFriends
+};
+
 export default connect(
   mapStateToProps,
-  { getFriends }
+  mapActionsToProps
 )(FriendsListView);
