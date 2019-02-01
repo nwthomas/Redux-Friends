@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addFriend, handleFormChange, clearForm } from "../../store/actions";
+import {
+  addFriend,
+  handleFormChange,
+  clearForm,
+  updateFriend
+} from "../../store/actions";
 
 class FriendsForm extends Component {
   handleChange = e => {
@@ -10,15 +15,31 @@ class FriendsForm extends Component {
 
   submitFriend = e => {
     e.preventDefault();
-    this.props.addFriend(
-      {
-        id: this.props.friends.length + 1,
-        name: this.props.inputName,
-        age: this.props.inputAge,
-        email: this.props.inputEmail
-      },
-      () => this.props.clearForm()
-    );
+    if (this.props.updatingID) {
+      this.props.updateFriend(
+        {
+          id: this.props.updatingID,
+          name: this.props.inputName,
+          age: this.props.inputAge,
+          email: this.props.inputEmail,
+          favoriteColor: this.props.inputFavColor,
+          birthplace: this.props.inputBirthplace
+        },
+        () => this.props.clearForm()
+      );
+    } else {
+      this.props.addFriend(
+        {
+          id: this.props.friends.length + 1,
+          name: this.props.inputName,
+          age: this.props.inputAge,
+          email: this.props.inputEmail,
+          favoriteColor: this.props.inputFavColor,
+          birthplace: this.props.inputBirthplace
+        },
+        () => this.props.clearForm()
+      );
+    }
   };
 
   clearForm = e => {
@@ -48,13 +69,29 @@ class FriendsForm extends Component {
         <input
           required
           type="text"
+          value={this.props.inputBirthplace}
+          name="inputBirthplace"
+          onChange={this.handleChange}
+          placeholder="Birthplace"
+        />
+        <input
+          required
+          type="text"
           value={this.props.inputEmail}
           name="inputEmail"
           onChange={this.handleChange}
           placeholder="Email"
         />
+        <input
+          required
+          type="text"
+          value={this.props.inputFavColor}
+          name="inputFavColor"
+          onChange={this.handleChange}
+          placeholder="Favorite color"
+        />
         <button type="submit">
-          {this.props.updatingFriend ? "Update Friend" : "Submit"}
+          {this.props.updatingID ? "Update Friend" : "Submit"}
         </button>
         <button onClick={this.clearForm} type="button">
           Clear
@@ -74,14 +111,18 @@ const mapStateToProps = state => {
     friends: state.friendsReducer.friends,
     inputName: state.formReducer.inputName,
     inputAge: state.formReducer.inputAge,
-    inputEmail: state.formReducer.inputEmail
+    inputEmail: state.formReducer.inputEmail,
+    updatingID: state.formReducer.updatingID,
+    inputBirthplace: state.formReducer.inputBirthplace,
+    inputFavColor: state.formReducer.inputFavColor
   };
 };
 
 const mapActionsToProps = {
   addFriend,
   handleFormChange,
-  clearForm
+  clearForm,
+  updateFriend
 };
 
 export default connect(

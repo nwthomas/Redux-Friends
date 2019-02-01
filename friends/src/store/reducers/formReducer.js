@@ -1,9 +1,12 @@
-import { UPDATE_INPUT_TEXT, CLEAR_FORM } from "../types";
+import { UPDATE_INPUT_TEXT, CLEAR_FORM, START_FORM_UPDATE } from "../types";
 
 const initialState = {
   inputName: "",
   inputAge: "",
-  inputEmail: ""
+  inputEmail: "",
+  updatingID: "",
+  inputBirthplace: "",
+  inputFavColor: ""
 };
 
 export const formReducer = (state = initialState, action) => {
@@ -18,7 +21,20 @@ export const formReducer = (state = initialState, action) => {
         ...state,
         inputName: "",
         inputAge: "",
-        inputEmail: ""
+        inputEmail: "",
+        updatingID: "",
+        inputBirthplace: "",
+        inputFavColor: ""
+      };
+    case START_FORM_UPDATE:
+      return {
+        ...state,
+        inputName: action.payload.inputName,
+        inputAge: action.payload.inputAge,
+        inputEmail: action.payload.inputEmail,
+        updatingID: action.payload.updatingID,
+        inputBirthplace: action.payload.inputBirthplace,
+        inputFavColor: action.payload.inputFavColor
       };
     default:
       return state;

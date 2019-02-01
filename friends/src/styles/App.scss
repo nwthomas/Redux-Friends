@@ -1,10 +1,10 @@
 // =================================== Variables/Mixins
-@import "../styles/libs/_variables.scss";
-@import "../styles/libs/_mixins.scss";
+@import "./libs/_variables.scss";
+@import "./libs/_mixins.scss";
 
 // =================================== General Styles
-@import "../styles/libs/_reset.scss";
-@import "../styles/libs/_general.scss";
+@import "./libs/_reset.scss";
+@import "./libs/_general.scss";
 
 // =================================== Page Components
 @import "../components/Friend/_Friend.scss";

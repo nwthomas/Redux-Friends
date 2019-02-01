@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./_Friend.scss";
 import { connect } from "react-redux";
-import { deleteFriend } from "../../store/actions";
+import { deleteFriend, startUpdate } from "../../store/actions";
 
 const Friend = props => {
   const deleteFriend = e => {
@@ -10,18 +10,31 @@ const Friend = props => {
     props.deleteFriend(props.friend.id);
   };
 
+  const startUpdateFriend = e => {
+    e.preventDefault();
+    props.startUpdate(props.friend);
+  };
+
   return (
     <div className="friend">
       <h2>{props.friend.name}</h2>
-      <p>{props.friend.age}</p>
-      <p>{props.friend.favoriteColor}</p>
-      <p>{props.friend.email}</p>
-      <p>{props.friend.birthplace}</p>
+      <p>Age: {props.friend.age}</p>
+      <p>Favorite Color: {props.friend.favoriteColor}</p>
+      <p>Email: {props.friend.email}</p>
+      <p>Birthplace: {props.friend.birthplace}</p>
+      <button type="button" onClick={startUpdateFriend}>
+        Update
+      </button>
       <button type="button" onClick={deleteFriend}>
         Delete
       </button>
     </div>
   );
+};
+
+const mapActionsToProps = {
+  deleteFriend,
+  startUpdate
 };
 
 Friend.propTypes = {
@@ -34,5 +47,5 @@ Friend.propTypes = {
 
 export default connect(
   null,
-  { deleteFriend }
+  mapActionsToProps
 )(Friend);

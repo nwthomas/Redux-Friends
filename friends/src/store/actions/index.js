@@ -10,8 +10,14 @@ import {
   DELETE_FRIEND_START,
   DELETE_FRIEND_SUCCESS,
   DELETE_FRIEND_ERROR,
-  CLEAR_FORM
+  START_FORM_UPDATE,
+  CLEAR_FORM,
+  UPDATE_FRIEND_START,
+  UPDATE_FRIEND_SUCCESS,
+  UPDATE_FRIEND_ERROR
 } from "../types";
+
+// ============================================== Friends Action Creators
 
 export const getFriends = _ => dispatch => {
   dispatch({ type: FETCH_FRIENDS_START });
@@ -38,6 +44,33 @@ export const addFriend = payload => dispatch => {
     });
 };
 
+export const deleteFriend = id => dispatch => {
+  dispatch({ type: DELETE_FRIEND_START });
+  axios
+    .delete(`http://localhost:5000/api/friends/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_FRIEND_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_FRIEND_ERROR, payload: err.data });
+    });
+};
+
+export const updateFriend = friend => dispatch => {
+  console.log(friend);
+  dispatch({ type: UPDATE_FRIEND_START });
+  axios
+    .put(`http://localhost:5000/api/friends/${friend.id}`, friend)
+    .then(res => {
+      dispatch({ type: UPDATE_FRIEND_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_FRIEND_ERROR, payload: err.data });
+    });
+};
+
+// ============================================== Form Action Creators
+
 export const clearForm = _ => {
   return {
     type: CLEAR_FORM
@@ -51,14 +84,16 @@ export const handleFormChange = e => {
   };
 };
 
-export const deleteFriend = id => dispatch => {
-  dispatch({ type: DELETE_FRIEND_START });
-  axios
-    .delete(`http://localhost:5000/api/friends/${id}`)
-    .then(res => {
-      dispatch({ type: DELETE_FRIEND_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: DELETE_FRIEND_ERROR, payload: err.data });
-    });
+export const startUpdate = friend => {
+  return {
+    type: START_FORM_UPDATE,
+    payload: {
+      inputName: friend.name,
+      inputAge: friend.age,
+      inputEmail: friend.email,
+      updatingID: friend.id,
+      inputBirthplace: friend.birthplace,
+      inputFavColor: friend.favoriteColor
+    }
+  };
 };

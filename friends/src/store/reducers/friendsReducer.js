@@ -7,7 +7,10 @@ import {
   ADD_FRIEND_ERROR,
   DELETE_FRIEND_START,
   DELETE_FRIEND_SUCCESS,
-  DELETE_FRIEND_ERROR
+  DELETE_FRIEND_ERROR,
+  UPDATE_FRIEND_START,
+  UPDATE_FRIEND_SUCCESS,
+  UPDATE_FRIEND_ERROR
 } from "../types";
 
 const initialState = {
@@ -20,7 +23,6 @@ const initialState = {
   newFriendAdded: false,
   deletingFriend: false,
   friendDeleted: false,
-  updateID: null,
   error: null
 };
 
@@ -86,6 +88,16 @@ export const friendsReducer = (state = initialState, action) => {
         deletingFriend: false,
         error: action
       };
+    case UPDATE_FRIEND_START:
+      return state;
+    case UPDATE_FRIEND_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        friends: action.payload
+      };
+    case UPDATE_FRIEND_ERROR:
+      return state;
     default:
       return state;
   }
