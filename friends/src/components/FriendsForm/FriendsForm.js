@@ -49,54 +49,58 @@ class FriendsForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submitFriend}>
-        <input
-          required
-          type="text"
-          value={this.props.inputName}
-          name="inputName"
-          onChange={this.handleChange}
-          placeholder="Name"
-        />
-        <input
-          required
-          type="text"
-          value={this.props.inputAge}
-          name="inputAge"
-          onChange={this.handleChange}
-          placeholder="Age"
-        />
-        <input
-          required
-          type="text"
-          value={this.props.inputBirthplace}
-          name="inputBirthplace"
-          onChange={this.handleChange}
-          placeholder="Birthplace"
-        />
-        <input
-          required
-          type="text"
-          value={this.props.inputEmail}
-          name="inputEmail"
-          onChange={this.handleChange}
-          placeholder="Email"
-        />
-        <input
-          required
-          type="text"
-          value={this.props.inputFavColor}
-          name="inputFavColor"
-          onChange={this.handleChange}
-          placeholder="Favorite color"
-        />
-        <button type="submit">
-          {this.props.updatingID ? "Update Friend" : "Submit"}
-        </button>
-        <button onClick={this.clearForm} type="button">
-          Clear
-        </button>
-      </form>
+      <div className="form__container">
+        <form onSubmit={this.submitFriend}>
+          <input
+            required
+            type="text"
+            value={this.props.inputName}
+            name="inputName"
+            onChange={this.handleChange}
+            placeholder="Name"
+          />
+          <input
+            required
+            type="text"
+            value={this.props.inputAge}
+            name="inputAge"
+            onChange={this.handleChange}
+            placeholder="Age"
+          />
+          <input
+            required
+            type="text"
+            value={this.props.inputBirthplace}
+            name="inputBirthplace"
+            onChange={this.handleChange}
+            placeholder="Birthplace"
+          />
+          <input
+            required
+            type="text"
+            value={this.props.inputEmail}
+            name="inputEmail"
+            onChange={this.handleChange}
+            placeholder="Email"
+          />
+          <input
+            required
+            type="text"
+            value={this.props.inputFavColor}
+            name="inputFavColor"
+            onChange={this.handleChange}
+            placeholder="Favorite color"
+          />
+          <div className="button__container">
+            <button className="btn" type="submit">
+              {this.props.updatingID ? "Update Friend" : "Submit"}
+            </button>
+            <button className="btn" onClick={this.clearForm} type="button">
+              Clear
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
